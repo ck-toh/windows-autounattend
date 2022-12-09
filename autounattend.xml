@@ -167,7 +167,7 @@
 				<NetworkLocation>Home</NetworkLocation>
 				<SkipUserOOBE>true</SkipUserOOBE>
 				<SkipMachineOOBE>true</SkipMachineOOBE>
-				<ProtectYourPC>3</ProtectYourPC>
+				<ProtectYourPC>1</ProtectYourPC>
 			</OOBE>
 			<UserAccounts>
 				<LocalAccounts>
