@@ -19,7 +19,7 @@ echo [Copy autounattend.xml to install media]
 copy /y .\autounattend\autounattend.xml .\WinOSCD
 
 echo [Generate ISO]
-oscdimg.exe  -m -o -u2 -udfver102 -bootdata:2#p0,e,b.\WinOSCD\boot\etfsboot.com#pEF,e,b.\WinOSCD\efi\microsoft\boot\Efisys.bin .\WinOSCD\ Win11Pro_22H2_en-GB_x64-Nov-Auto.iso
+oscdimg.exe  -m -o -u2 -udfver102 -bootdata:2#p0,e,b.\WinOSCD\boot\etfsboot.com#pEF,e,b.\WinOSCD\efi\microsoft\boot\Efisys.bin .\WinOSCD\ Win11Pro_22H2_en-GB_x64-Auto.iso
 goto :end
 
 rem check number of edition and associated index
