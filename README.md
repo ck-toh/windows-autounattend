@@ -1,5 +1,9 @@
 # Windows 10/11 Autounattended
 
+autounattend.xml will create disk partition for uefi specifications
+![alt text](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/images/dep-win10-partitions-uefi.png?view=windows-11 "UEFI Partition Layout")
+
+
 1. Download ISO from Microsoft and extract into `.\winoscd`
 2. Download Latest Patch from [Windows Catalog Update](https://www.catalog.update.microsoft.com/) and store in `.\hotfix`
 3. Check ISO edition to patch 
