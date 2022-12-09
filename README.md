@@ -1,6 +1,6 @@
-# Windows 10/11 Autounattended
+# Windows 10/11 ISO Patch and Install
 
-autounattend.xml will create disk partition for uefi specifications
+Auto deployment will create disk partition for UEFI for x64 systems, partition layout as follows:
 ![alt text](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/images/dep-win10-partitions-uefi.png?view=windows-11 "UEFI Partition Layout")
 
 
