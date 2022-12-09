@@ -32,7 +32,7 @@ patchiso/
 │   ├── boot/
 │   ├── efi/
 │   ├── sources/
-|   |   └── install.wim
+│   │   └── install.wim
 │   └── support/
 ├── autounattend/
 │   └── autounattend.xml
