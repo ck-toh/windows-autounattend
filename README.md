@@ -1,6 +1,5 @@
 # Windows 10/11 Autounattended
 
-## Patching ISO
 1. Download ISO from Microsoft and extract into `.\winoscd`
 2. Download Latest Patch from [Windows Catalog Update](https://www.catalog.update.microsoft.com/) and store in `.\hotfix`
 3. Check ISO edition to patch 
@@ -21,3 +20,19 @@ dism.exe  /Unmount-wim /mountdir:".\WIM" /commit
 copy /y .\autounattend\autounattend.xml .\WinOSCD
 oscdimg.exe  -m -o -u2 -udfver102 -bootdata:2#p0,e,b.\WinOSCD\boot\etfsboot.com#pEF,e,b.\WinOSCD\efi\microsoft\boot\Efisys.bin .\WinOSCD\ Win11Pro_22H2_en-GB_x64-Auto.iso
 ```
+
+## patchISO directory structure
+<pre>
+patchiso/
+├── winoscd/
+│   ├── boot/
+│   ├── efi/
+│   ├── sources/
+│   └── support/
+├── autounattend/
+│   └── autounattend.xml
+├── hotfix/
+│   └── *.msu
+├── wim/
+└── patchiso.cmd
+</pre>
