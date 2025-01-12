@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<unattend xmlns="urn:schemas-microsoft-com:unattend" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State">    
+    <settings pass="offlineServicing"></settings>
+    <settings pass="windowsPE">
+    
+        <component name="Microsoft-Windows-International-Core-WinPE" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+			<SetupUILanguage>
+				<UILanguage>en-US</UILanguage>
+			</SetupUILanguage>
+			<InputLocale>0809:00000809</InputLocale>
+			<SystemLocale>en-US</SystemLocale>
+			<UILanguage>en-US</UILanguage>
+			<UILanguageFallback>en-US</UILanguageFallback>
+			<UserLocale>en-GB</UserLocale>
+        </component>
+        
+        <component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+			<DiskConfiguration>
+				<WillShowUI>OnError</WillShowUI>
+				<Disk wcm:action="add">
+					<DiskID>0</DiskID>
+					<WillWipeDisk>true</WillWipeDisk>
+					<CreatePartitions>
+						<CreatePartition wcm:action="add">
+							<Order>1</Order>
+							<Type>EFI</Type>
+							<Size>300</Size>
+						</CreatePartition>
+						<CreatePartition wcm:action="add">
+							<Order>2</Order>
+							<Type>MSR</Type>
+							<Size>128</Size>
+						</CreatePartition>
+						<CreatePartition wcm:action="add">
+							<Order>3</Order>
+							<Type>Primary</Type>
+							<Extend>true</Extend>
+						</CreatePartition>
+					</CreatePartitions>
+					<ModifyPartitions>
+						<ModifyPartition wcm:action="add">
+							<Order>1</Order>
+							<PartitionID>1</PartitionID>
+							<Format>FAT32</Format>
+							<Label>System</Label>
+							<Active>false</Active>
+						</ModifyPartition>
+						<ModifyPartition wcm:action="add">
+							<Order>2</Order>
+							<PartitionID>3</PartitionID>
+							<Format>NTFS</Format>
+							<Label>WINDOWS</Label>
+							<Letter>C</Letter>
+						</ModifyPartition>
+					</ModifyPartitions>
+				</Disk>
+			</DiskConfiguration>
+			<ImageInstall>
+				<OSImage>
+					<InstallFrom>
+					       <Path>d:\sources\install.wim</Path>
+					       <MetaData wcm:action="add">
+					              <Key>/IMAGE/NAME</Key>
+					              <Value>Windows Server 2025 Datacenter (Desktop Experience)</Value>
+					       </MetaData>
+					</InstallFrom>
+                                        <WillShowUI>OnError</WillShowUI>
+					<InstallToAvailablePartition>true</InstallToAvailablePartition>
+				</OSImage>
+			</ImageInstall>
+
+            <UserData>
+                <ProductKey>
+                    <Key></Key>
+                </ProductKey>
+                <AcceptEula>true</AcceptEula>
+            </UserData>
+            <RunSynchronous>
+                <RunSynchronousCommand wcm:action="add">
+                    <Order>1</Order>
+                    <Path>reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassTPMCheck /t REG_DWORD /d 1 /f</Path>
+                </RunSynchronousCommand>
+                <RunSynchronousCommand wcm:action="add">
+                    <Order>2</Order>
+                    <Path>reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassSecureBootCheck /t REG_DWORD /d 1 /f</Path>
+                </RunSynchronousCommand>
+                <RunSynchronousCommand wcm:action="add">
+                    <Order>3</Order>
+                    <Path>reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassRAMCheck /t REG_DWORD /d 1 /f</Path>
+                </RunSynchronousCommand>
+            </RunSynchronous>
+        </component>
+        </settings>
+        
+    <settings pass="generalize"></settings>
+    <settings pass="specialize">
+        <component name="Microsoft-Windows-Deployment" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+            <RunSynchronous>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>1</Order>
+					<Path>reg add HKLM\SYSTEM\Setup\LabConfig /v BypassTPMCheck /t REG_DWORD /d 1 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>2</Order>
+					<Path>reg add HKLM\SYSTEM\Setup\LabConfig /v BypassSecureBootCheck /t REG_DWORD /d 1 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>3</Order>
+					<Path>reg add HKLM\SYSTEM\Setup\LabConfig /v BypassRAMCheck /t REG_DWORD /d 1 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>4</Order>
+					<Path>reg add HKLM\SYSTEM\Setup\LabConfig /v BypassCPUCheck /t REG_DWORD /d 1 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>5</Order>
+					<Path>reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OOBE /v BypassNRO /t REG_DWORD /d 1 /f</Path>
+				</RunSynchronousCommand>
+            </RunSynchronous>
+        </component>
+    </settings>
+    
+    <!-- User Account and Local Account-->
+    <settings pass="auditSystem"></settings>
+    <settings pass="auditUser"></settings>
+    <settings pass="oobeSystem">
+        <component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+			<InputLocale>0809:00000809</InputLocale>
+			<SystemLocale>en-US</SystemLocale>
+			<UILanguage>en-US</UILanguage>
+			<UILanguageFallback>en-US</UILanguageFallback>
+			<UserLocale>en-GB</UserLocale>
+        </component>
+        <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+			<AutoLogon>
+				<Password>
+					<Value></Value>
+					<PlainText>true</PlainText>
+				</Password>
+				<Enabled>true</Enabled>
+				<Username>Admin</Username>
+			</AutoLogon>
+			<OOBE>
+				<HideEULAPage>true</HideEULAPage>
+				<HideOEMRegistrationScreen>true</HideOEMRegistrationScreen>
+				<HideOnlineAccountScreens>true</HideOnlineAccountScreens>
+				<HideWirelessSetupInOOBE>true</HideWirelessSetupInOOBE>
+				<NetworkLocation>Home</NetworkLocation>
+				<SkipUserOOBE>true</SkipUserOOBE>
+				<SkipMachineOOBE>true</SkipMachineOOBE>
+				<ProtectYourPC>1</ProtectYourPC>
+			</OOBE>
+            <UserAccounts>
+                <LocalAccounts>
+                    <LocalAccount wcm:action="add">
+                        <Name>Admin</Name>
+                        <Group>Administrators</Group>
+                        <Password>
+                            <Value></Value>
+                            <PlainText>true</PlainText>
+                        </Password>
+                    </LocalAccount>
+                </LocalAccounts>
+            </UserAccounts>
+            <FirstLogonCommands>
+				<SynchronousCommand wcm:action="add">
+					<Order>1</Order>
+					<Description>making the magic happen</Description>
+					<CommandLine>cmd /C wmic useraccount where "name='Admin'" set PasswordExpires=FALSE</CommandLine>
+				</SynchronousCommand>
+				<SynchronousCommand wcm:action="add">
+					<Description>Control Panel View</Description>
+					<Order>2</Order>
+					<CommandLine>reg add &quot;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel&quot; /v StartupPage /t REG_DWORD /d 1 /f</CommandLine>
+					<RequiresUserInput>true</RequiresUserInput>
+				</SynchronousCommand>
+				<SynchronousCommand wcm:action="add">
+					<Order>3</Order>
+					<Description>Control Panel Icon Size</Description>
+					<RequiresUserInput>false</RequiresUserInput>
+					<CommandLine>reg add &quot;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel&quot; /v AllItemsIconView /t REG_DWORD /d 1 /f</CommandLine>
+				</SynchronousCommand>
+				<SynchronousCommand wcm:action="add">
+					<Order>4</Order>
+					<Description>Create WinRE Partition</Description>
+					<RequiresUserInput>false</RequiresUserInput>
+					<CommandLine>powershel /w normal -ExecutionPolicy Bypass -Command &amp;{ @('select disk 0','select partition 3','shrink desired=984 minimum=984','create partition primary','format quick fs=ntfs label=Recovery','set id=de94bba4-06d1-4d40-a16a-bfd50179d6ac','gpt attributes=0x8000000000000001')|diskpart}</CommandLine>
+				</SynchronousCommand>
+				<SynchronousCommand wcm:action="add">
+					<Order>5</Order>
+					<Description>Active Recovery image on WinRE Partition</Description>
+					<RequiresUserInput>false</RequiresUserInput>
+					<CommandLine>powershell /w normal -ExecutionPolicy Bypass -Command reagentc /disable; reagentc /enable</CommandLine>
+				</SynchronousCommand>
+				<SynchronousCommand wcm:action="add">
+					<Order>6</Order>
+					<Description>Remove windows.old</Description>
+					<RequiresUserInput>false</RequiresUserInput>
+					<CommandLine>powershell /w normal -ExecutionPolicy Bypass -Command Remove-Item -LiteralPath C:\Windows.old -Force -Recurse</CommandLine>
+				</SynchronousCommand>
+
+            </FirstLogonCommands>
+            <TimeZone>GMT Standard Time</TimeZone>
+        </component>
+    </settings>
+</unattend>
