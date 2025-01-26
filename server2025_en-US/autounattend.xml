@@ -61,7 +61,6 @@
 			<ImageInstall>
 				<OSImage>
 					<InstallFrom>
-					       <Path>d:\sources\install.wim</Path>
 					       <MetaData wcm:action="add">
 					              <Key>/IMAGE/NAME</Key>
 					              <Value>Windows Server 2025 Datacenter (Desktop Experience)</Value>
